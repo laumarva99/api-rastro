@@ -43,3 +43,7 @@ Keep-Alive: timeout=5
 Cuando MongoDB está apagado, el servidor da un error 500 después de unos 5 segundos porque no puede conectarse a la base de datos (//5 de index.ts). El middleware de errores detecta el problema y muestra un mensaje de error sin mostrar información interna del servidor
 
 
+
+##Ejercicio 2
+
+Cuando recibimos un dato desde la URL, llega como texto. Pero MongoDB necesita que el precio sea un número (380) y no un texto ("380")
