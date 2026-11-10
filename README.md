@@ -2,7 +2,7 @@
 
 API de **Rastro**, una app para comprar y vender cosas de segunda mano en la Comunitat Valenciana.
 
-Está hecha con **Express**, **TypeScript** y **MongoDB**. Es la continuación de la entrega de MongoDB, donde diseñé la base de datos.
+Está hecha con **Express**, **TypeScript** y **MongoDB**. Es la continuación de la entrega de MongoDB, donde diseñé la base de datos. Se añaden en cada apartado unos comentarios para que posteriormente puedan guiar mejor la comprensión de lectura del código.
 
 ## Tecnologías
 
