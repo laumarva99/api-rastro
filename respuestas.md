@@ -59,3 +59,14 @@ Si no los ignorara, alguien podría modificar los datos de un anuncio y hacer lo
 ## Pregunta 4
 
 No, no debe cambiarla porque como habíamos comentado en otro momento, el precio que guarda la oferta es el que tenía el anuncio cuando Sara hizo la oferta. Si cambiara, parecería que Sara ofreció 340 € sobre un precio de 350 €
+
+
+
+## Pregunta 5
+
+Da un error porque la petición está bien hecha, pero el anuncio ya está vendido y no se puede volver a comprar. Un 400 significa que la petición está mal hecha, mientras que un 409 significa que hay un conflicto con el estado actual
+
+
+## Pregunta 6
+
+MongoDB mira que no haya datos duplicados, como dos usuarios con el mismo email. Yo he tenido que comprobar con código: comprobar que los IDs sean correctos, que el importe sea un número, que existan el anuncio y el comprador y que el anuncio esté disponible para venderse.
