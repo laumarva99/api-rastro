@@ -54,3 +54,8 @@ Cuando recibimos un dato desde la URL, llega como texto. Pero MongoDB necesita q
 
 Porque esos datos los decide la API, no el cliente: un anuncio nuevo siempre está disponible y sin visitas.
 Si no los ignorara, alguien podría modificar los datos de un anuncio y hacer lo que quiera
+
+
+## Pregunta 4
+
+No, no debe cambiarla porque como habíamos comentado en otro momento, el precio que guarda la oferta es el que tenía el anuncio cuando Sara hizo la oferta. Si cambiara, parecería que Sara ofreció 340 € sobre un precio de 350 €
