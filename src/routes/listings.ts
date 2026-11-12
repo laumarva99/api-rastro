@@ -144,4 +144,58 @@ router.post("/", async (req, res) => {
 });
 
 
+// ---------- PATCH /api/listings/:id (cambiar el precio) ----------
+router.patch("/:id", async (req, res) => {
+  // 1. ¿El id tiene forma de ObjectId? Si no → 400
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ error: "El ID no tiene un formato válido" });
+    return;
+  }
+
+  // 2. Solo leemos price. Cualquier otro campo se ignora
+  const { price } = req.body ?? {};
+
+  if (typeof price !== "number" || !Number.isFinite(price) || price < 0) {
+    res.status(400).json({ error: "price debe ser un número mayor o igual que 0" });
+    return;
+  }
+
+  // 3. Cambia el precio y devuelve el anuncio ya modificado
+  const updated = await listingsCollection().findOneAndUpdate(
+    { _id: new ObjectId(req.params.id) }, // cuál
+    { $set: { price } },                  // qué cambiar (el resto se queda igual)
+    { returnDocument: "after" }           // devuélvelo con el precio nuevo
+  );
+
+  // 4. Si no existe → 404
+  if (!updated) {
+    res.status(404).json({ error: "Anuncio no encontrado" });
+    return;
+  }
+
+  res.json(updated);
+});
+
+// ---------- DELETE /api/listings/:id (borrar) ----------
+router.delete("/:id", async (req, res) => {
+  // 1. ¿El id tiene forma de ObjectId? Si no → 400
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ error: "El ID no tiene un formato válido" });
+    return;
+  }
+
+  // 2. Lo borramos
+  const result = await listingsCollection().deleteOne({ _id: new ObjectId(req.params.id) });
+
+  // 3. deletedCount dice cuántos ha borrado. Si es 0, no existía → 404
+  if (result.deletedCount === 0) {
+    res.status(404).json({ error: "Anuncio no encontrado" });
+    return;
+  }
+
+  // 4. Borrado → 204, sin nada en la respuesta
+  res.status(204).send();
+});
+
+
 export default router;
