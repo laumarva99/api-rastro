@@ -1,6 +1,6 @@
 # Respuestas
 
-##Ejercicio 0
+## Pregunta 0
 
 ********api-rastro (main)
 $ git push
@@ -24,7 +24,7 @@ GitHub no deja subir cambios a main sin una pull request y pasar los checks
 
 
 
-##Ejercicio 1
+## Pregunta 1
 
 ********api-rastro (feature/database-connection)
 $ curl -i http://localhost:3000/api/health
@@ -44,6 +44,13 @@ Cuando MongoDB está apagado, el servidor da un error 500 después de unos 5 seg
 
 
 
-##Ejercicio 2
+## Pregunta 2
 
 Cuando recibimos un dato desde la URL, llega como texto. Pero MongoDB necesita que el precio sea un número (380) y no un texto ("380")
+
+
+
+## Pregunta 3
+
+Porque esos datos los decide la API, no el cliente: un anuncio nuevo siempre está disponible y sin visitas.
+Si no los ignorara, alguien podría modificar los datos de un anuncio y hacer lo que quiera
