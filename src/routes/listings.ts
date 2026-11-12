@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
-import { listingsCollection, usersCollection } from "../db";
+import { listingsCollection, usersCollection, offersCollection } from "../db";
 import type { Filter } from "mongodb";
 import type { Listing } from "../types";
 
@@ -176,6 +176,7 @@ router.patch("/:id", async (req, res) => {
   res.json(updated);
 });
 
+
 // ---------- DELETE /api/listings/:id (borrar) ----------
 router.delete("/:id", async (req, res) => {
   // 1. ¿El id tiene forma de ObjectId? Si no → 400
@@ -195,6 +196,31 @@ router.delete("/:id", async (req, res) => {
 
   // 4. Borrado → 204, sin nada en la respuesta
   res.status(204).send();
+});
+
+
+
+// ---------- GET /api/listings/:id/offers (ofertas de un anuncio) ----------
+router.get("/:id/offers", async (req, res) => {
+  // 1. ¿El id tiene forma de ObjectId? Si no → 400
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ error: "El ID no tiene un formato válido" });
+    return;
+  }
+
+  const listingId = new ObjectId(req.params.id);
+
+  // 2. El anuncio tiene que existir. Si no → 404
+  const listing = await listingsCollection().findOne({ _id: listingId });
+  if (!listing) {
+    res.status(404).json({ error: "Anuncio no encontrado" });
+    return;
+  }
+
+  // 3. Las ofertas guardan el id del anuncio en listing.id
+  const offers = await offersCollection().find({ "listing.id": listingId }).toArray();
+
+  res.json(offers);
 });
 
 
